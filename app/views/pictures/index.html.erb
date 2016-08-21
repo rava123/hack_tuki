@@ -1,0 +1,36 @@
+
+<script type="text/javascript" src="http://webos-goodies.googlecode.com/svn/trunk/products/jslib/draggable_grid/draggable_grid.js"></script>
+
+<p id="notice"><%= notice %></p>
+
+<br>
+<p>
+<%= link_to image_tag('add.jpg', alt: "Rails", align: "left"), '/pictures/new' -%>
+<h1>My Pictures</h1>
+</p>
+<style type="text/css">
+  .draggable {
+    display: inline-block;
+    vertical-align: top;
+    width: 202px;
+    height: 202px;
+    zoom: 1;
+    *display: inline;
+  }
+  </style>
+
+<div id="grid" >
+  <% @pictures.each do |picture| %>
+  <div class="draggable">
+    <%= picture.created_at.to_s.split(' ').first  %>
+    <div id="no-turbolinks" data-no-turbolink><%= link_to image_tag(picture.picture.url(:thumb)), picture.picture.url(:browse) ,:rel => "lightbox[0]"%></div>
+  </div>
+  <% end %>
+</div>
+
+<script type="text/javascript">
+  new DraggableGrid('grid',  { handleClass: 'handle' });
+</script>
+
+
+
